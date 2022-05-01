@@ -7,7 +7,10 @@ namespace NerdStore.Core.DomainObjects
     public abstract class Entity
     {
         /// <summary>
-        /// 
+        /// Sempre é uma boa pratica utilizar o Guid para identificação.
+        /// <para>Um dos motivos é que já possuimos o valor dele antes mesmo de persistir no banco de Dados</para>
+        /// <para>Depender de um int que é gerado quando o registro [é salvo no banco acaba limitando muito as nossas
+        /// possibilidades</para>
         /// </summary>
         public Guid Id { get; set; }
 
