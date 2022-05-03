@@ -2,6 +2,12 @@
 
 namespace NerdStore.Core.DomainObjects
 {
+    /// <summary>
+    /// <para>[ Assertion Concern ]</para>
+    /// Está pratica está no livro do DDD escrito pelo Vernon. 
+    /// <para>É uma boa pratica criar uma classe responsavel pelas validaçoes. </para>
+    /// <para>Seria as preoculpaçoes de asserção</para>
+    /// </summary>
     public class Validacoes
     {
         public static void ValidarSeIgual(object object1, object object2, string mensagem)
