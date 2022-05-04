@@ -11,6 +11,7 @@ namespace NerdStore.Catalogo.Domain
         // EF Relation
         public ICollection<Produto> Produtos { get; set; }
 
+        // construtor utilizado pelo EF 
         protected Categoria() { }
 
         public Categoria(string nome, int codigo)

@@ -22,6 +22,8 @@ namespace NerdStore.Catalogo.Data.Mappings
                 .IsRequired()
                 .HasColumnType("varchar(250)");
 
+            //Converte o Objeto de valor dimensoes para propriedades da tabela produto
+            //e quando realizar a leitura transforma de novo no objeto de valor
             builder.OwnsOne(c => c.Dimensoes, cm =>
             {
                 cm.Property(c => c.Altura)
