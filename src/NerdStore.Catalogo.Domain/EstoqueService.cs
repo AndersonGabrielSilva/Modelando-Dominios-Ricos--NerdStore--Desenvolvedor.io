@@ -7,6 +7,12 @@ using NerdStore.Core.Messages.CommonMessages.Notifications;
 
 namespace NerdStore.Catalogo.Domain
 {
+    /// <summary>
+    /// O Domain Service
+    /// <para>É utilizado para representar as açoes da Linguem ubiqua</para>
+    /// <para>Trabalhe com o servico de dominio para representar açoes conhecidas pela linguagem ubiqua</para>
+    /// <para>Todas as Açoes do Serviço de Dominio deve ser conhecido pelo Domain Expert</para>
+    /// </summary>
     public class EstoqueService : IEstoqueService
     {
         private readonly IProdutoRepository _produtoRepository;
