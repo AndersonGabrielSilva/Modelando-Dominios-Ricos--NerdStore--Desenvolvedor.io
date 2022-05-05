@@ -7,6 +7,9 @@ using NerdStore.Core.Messages.CommonMessages.Notifications;
 
 namespace NerdStore.Core.Communication.Mediator
 {
+    /// <summary>
+    /// Implementação do MediatR  
+    /// </summary>
     public class MediatorHandler : IMediatorHandler
     {
         private readonly IMediator _mediator;
@@ -26,6 +29,7 @@ namespace NerdStore.Core.Communication.Mediator
 
         public async Task PublicarEvento<T>(T evento) where T : Event
         {
+            //Publicar Evento
             await _mediator.Publish(evento);
             await _eventSourcingRepository.SalvarEvento(evento);
 

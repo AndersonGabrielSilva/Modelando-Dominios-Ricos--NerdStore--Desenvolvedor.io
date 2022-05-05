@@ -6,6 +6,10 @@ using NerdStore.Core.Messages.CommonMessages.IntegrationEvents;
 
 namespace NerdStore.Catalogo.Domain.Events
 {
+    /// <summary>
+    /// Responsavel por capturar os eventos lançados 
+    /// <para>INotificationHandler<T> Interface que captura os eventos lancados </para>
+    /// </summary>
     public class ProdutoEventHandler : 
         INotificationHandler<ProdutoAbaixoEstoqueEvent>,
         INotificationHandler<PedidoIniciadoEvent>,

@@ -4,6 +4,9 @@ using MediatR;
 
 namespace NerdStore.Core.Messages
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class Command : Message, IRequest<bool>
     {
         public DateTime Timestamp { get; private set; }
