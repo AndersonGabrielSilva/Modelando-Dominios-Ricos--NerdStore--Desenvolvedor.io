@@ -6,6 +6,9 @@ using NerdStore.Catalogo.Application.ViewModels;
 using NerdStore.Catalogo.Domain;
 using NerdStore.Core.DomainObjects;
 
+/// <summary>
+/// A camada de aplica~ção faz fronteira diretamente com o Front End 
+/// </summary>
 namespace NerdStore.Catalogo.Application.Services
 {
     public class ProdutoAppService : IProdutoAppService

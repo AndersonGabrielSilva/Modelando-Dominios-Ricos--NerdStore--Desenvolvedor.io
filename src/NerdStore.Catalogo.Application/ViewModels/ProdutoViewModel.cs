@@ -4,6 +4,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NerdStore.Catalogo.Application.ViewModels
 {
+    /// <summary>
+    /// São objetos de comunicação
+    /// DTOs
+    /// <para>Podemos colocar nela algumas validaçoes com os Dataanotations. </para> 
+    /// </summary>
     public class ProdutoViewModel
     {
         [Key]

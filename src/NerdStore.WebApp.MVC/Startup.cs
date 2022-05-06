@@ -55,10 +55,13 @@ namespace NerdStore.WebApp.MVC
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            //Configura AutoMapper
             services.AddAutoMapper(typeof(DomainToViewModelMappingProfile), typeof(ViewModelToDomainMappingProfile));
 
+            //Configura Mediator - Para Trabalhar com Eventos
             services.AddMediatR(typeof(Startup));
 
+            //Registra Servicos
             services.RegisterServices();
         }
 
