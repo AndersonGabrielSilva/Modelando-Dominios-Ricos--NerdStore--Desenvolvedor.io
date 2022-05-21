@@ -4,6 +4,9 @@ using NerdStore.Core.Messages;
 
 namespace NerdStore.Vendas.Application.Commands
 {
+    /// <summary>
+    /// No commando possui todas as informaçoes necessarias para adicionar um item a um pedido, em formato de propriedades
+    /// </summary>
     public class AdicionarItemPedidoCommand : Command
     {
         public Guid ClienteId { get; private set; }
@@ -21,6 +24,10 @@ namespace NerdStore.Vendas.Application.Commands
             ValorUnitario = valorUnitario;
         }
 
+        /// <summary>
+        /// É estremamente importante validar o comando
+        /// </summary>
+        /// <returns></returns>
         public override bool EhValido()
         {
             ValidationResult = new AdicionarItemPedidoValidation().Validate(this);
@@ -28,12 +35,18 @@ namespace NerdStore.Vendas.Application.Commands
         }
     }
 
+    /// <summary>
+    /// [AbstractValidator<TClass>] - Utilizada para criar uma validação para uma determinada classe
+    /// <para></para>
+    /// </summary>
     public class AdicionarItemPedidoValidation : AbstractValidator<AdicionarItemPedidoCommand>
     {
         public AdicionarItemPedidoValidation()
         {
+            //Rule = Regra
+            //RuleFor = Regra para
             RuleFor(c => c.ClienteId)
-                .NotEqual(Guid.Empty)
+                .NotEqual(Guid.Empty)                
                 .WithMessage("Id do cliente inválido");
 
             RuleFor(c => c.ProdutoId)

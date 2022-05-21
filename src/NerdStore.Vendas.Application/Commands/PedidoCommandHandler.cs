@@ -14,6 +14,11 @@ using NerdStore.Vendas.Domain;
 
 namespace NerdStore.Vendas.Application.Commands
 {
+    /// <summary>
+    /// Responsavel por manipular os meus Commands
+    /// MediatR 
+    /// <para>[IRequestHandler<TCommand>] - Responsavel por informar qual o cammando que eu irei manipular </para>
+    /// </summary>
     public class PedidoCommandHandler :
         IRequestHandler<AdicionarItemPedidoCommand, bool>,
         IRequestHandler<AtualizarItemPedidoCommand, bool>,
@@ -37,6 +42,7 @@ namespace NerdStore.Vendas.Application.Commands
 
         public async Task<bool> Handle(AdicionarItemPedidoCommand message, CancellationToken cancellationToken)
         {
+            //Antes de tudo é necessario validar o commando
             if (!ValidarComando(message)) return false;
 
             var pedido = await _pedidoRepository.ObterPedidoRascunhoPorClienteId(message.ClienteId);
@@ -237,6 +243,7 @@ namespace NerdStore.Vendas.Application.Commands
         {
             if (message.EhValido()) return true;
 
+            //Dispara as mensagens de Erros 
             foreach (var error in message.ValidationResult.Errors)
             {
                 _mediatorHandler.PublicarNotificacao(new DomainNotification(message.MessageType, error.ErrorMessage));
