@@ -6,6 +6,10 @@ using NerdStore.Core.DomainObjects;
 
 namespace NerdStore.Vendas.Domain
 {
+    /// <summary>
+    /// Cupons de Descontos
+    /// <para></para>
+    /// </summary>
     public class Voucher : Entity
     {
         public string Codigo { get; private set; }

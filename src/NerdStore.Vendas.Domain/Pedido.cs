@@ -6,6 +6,11 @@ using NerdStore.Core.DomainObjects;
 
 namespace NerdStore.Vendas.Domain
 {
+    /// <summary>
+    /// AggregateRoot
+    /// <para>Sempre é uma boa pratica trazer o maximo possivel de responsabilidade 
+    /// para a Raiz de Agregação</para>    
+    /// </summary>
     public class Pedido : Entity, IAggregateRoot
     {
         public int Codigo { get; private set; }
@@ -29,9 +34,10 @@ namespace NerdStore.Vendas.Domain
             VoucherUtilizado = voucherUtilizado;
             Desconto = desconto;
             ValorTotal = valorTotal;
-            _pedidoItems = new List<PedidoItem>();
+            _pedidoItems = new List<PedidoItem>();            
         }
 
+        // EF
         protected Pedido()
         {
             _pedidoItems = new List<PedidoItem>();
@@ -162,6 +168,10 @@ namespace NerdStore.Vendas.Domain
             PedidoStatus = PedidoStatus.Cancelado;
         }
 
+        /// <summary>
+        /// Reponsavel por criar uma instancia de Pedido 
+        /// <para>Quando temos uma classe dentro de outra classe, isto é chamada de "classe alinhada"</para>
+        /// </summary>
         public static class PedidoFactory
         {
             public static Pedido NovoPedidoRascunho(Guid clienteId)

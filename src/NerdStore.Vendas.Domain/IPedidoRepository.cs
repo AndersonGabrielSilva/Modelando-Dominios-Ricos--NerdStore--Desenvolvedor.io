@@ -5,6 +5,10 @@ using NerdStore.Core.Data;
 
 namespace NerdStore.Vendas.Domain
 {
+    /// <summary>
+    /// Sempre apenas um repositorio por aggregação root
+    /// <para>Repositorio do Pedido</para>
+    /// </summary>
     public interface IPedidoRepository : IRepository<Pedido>
     {
         Task<Pedido> ObterPorId(Guid id);

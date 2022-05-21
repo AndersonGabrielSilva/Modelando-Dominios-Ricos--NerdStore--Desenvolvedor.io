@@ -22,6 +22,7 @@ namespace NerdStore.Vendas.Domain
             ValorUnitario = valorUnitario;
         }
 
+        // EF 
         protected PedidoItem() { }
 
         internal void AssociarPedido(Guid pedidoId)

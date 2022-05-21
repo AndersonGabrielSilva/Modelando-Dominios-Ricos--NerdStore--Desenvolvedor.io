@@ -25,7 +25,7 @@ namespace NerdStore.WebApp.MVC.Controllers.Admin
         [Route("novo-produto")]
         public async Task<IActionResult> NovoProduto()
         {
-            return View(await PopularCategorias(new ProdutoViewModel()));
+             return View(await PopularCategorias(new ProdutoViewModel()));
         }
 
         [Route("novo-produto")]
