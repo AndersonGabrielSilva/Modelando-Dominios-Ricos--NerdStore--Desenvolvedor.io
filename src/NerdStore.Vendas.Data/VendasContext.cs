@@ -58,6 +58,7 @@ namespace NerdStore.Vendas.Data
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
 
+            //É uma contrant que gera um código de pedido incrementado de 1 em 1, iniciando a sequencia com 1000
             modelBuilder.HasSequence<int>("MinhaSequencia").StartsAt(1000).IncrementsBy(1);
             base.OnModelCreating(modelBuilder);
         }

@@ -34,6 +34,14 @@ namespace NerdStore.Vendas.Data.Repository
             var pedido = await _context.Pedidos.FirstOrDefaultAsync(p => p.ClienteId == clienteId && p.PedidoStatus == PedidoStatus.Rascunho);
             if (pedido == null) return null;
 
+            /*[LoadAsync] -  Utilizado para garregar posteriormente os dados do Pedido
+                             Popula-se depois os valores do pedido, ao inves de adicionar o Include
+                
+              [Collection] - É utilizado para popular relacionamentos de 1 -> N
+
+              [Reference] -  É utilizado para popular relacionamentos de 1 -> 1
+             */
+
             await _context.Entry(pedido)
                 .Collection(i => i.PedidoItems).LoadAsync();
 
