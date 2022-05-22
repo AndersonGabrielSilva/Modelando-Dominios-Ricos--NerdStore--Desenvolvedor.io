@@ -51,7 +51,7 @@ namespace NerdStore.WebApp.MVC.Controllers
             var command = new AdicionarItemPedidoCommand(ClienteId, produto.Id, produto.Nome, quantidade, produto.Valor);
             await _mediatorHandler.EnviarComando(command);
 
-            //
+            //Verifica se a operação foi valida
             if (OperacaoValida())
             {
                 return RedirectToAction("Index");

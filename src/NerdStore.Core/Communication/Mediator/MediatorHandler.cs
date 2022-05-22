@@ -43,6 +43,7 @@ namespace NerdStore.Core.Communication.Mediator
             return await _mediator.Send(comando);
         }
 
+        //Dispara a notificação de evento
         public async Task PublicarEvento<T>(T evento) where T : Event
         {
             //Publicar Evento
@@ -51,11 +52,13 @@ namespace NerdStore.Core.Communication.Mediator
 
         }
 
+        //Dispara a notificação de dominio
         public async Task PublicarNotificacao<T>(T notificacao) where T : DomainNotification
         {
             await _mediator.Publish(notificacao);
         }
 
+        //Dispara o evento de dominio
         public async Task PublicarDomainEvent<T>(T notificacao) where T : DomainEvent
         {
             await _mediator.Publish(notificacao);

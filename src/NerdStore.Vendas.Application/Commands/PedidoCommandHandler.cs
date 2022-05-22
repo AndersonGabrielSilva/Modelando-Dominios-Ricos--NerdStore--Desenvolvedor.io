@@ -243,7 +243,10 @@ namespace NerdStore.Vendas.Application.Commands
         {
             if (message.EhValido()) return true;
 
-            //Dispara as mensagens de Erros 
+            /* Dispara as mensagens de Erros como Notificações de Dominio
+             * Que será capturado pelo seu Handler especifico, onde lá no controler iremos conseguir 
+             * recuperar os valores das notificaçoes
+             */
             foreach (var error in message.ValidationResult.Errors)
             {
                 _mediatorHandler.PublicarNotificacao(new DomainNotification(message.MessageType, error.ErrorMessage));
