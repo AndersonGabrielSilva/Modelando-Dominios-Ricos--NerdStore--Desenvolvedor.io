@@ -39,11 +39,21 @@ namespace NerdStore.Vendas.Application.Events
 
         public async Task Handle(PedidoPagamentoRealizadoEvent message, CancellationToken cancellationToken)
         {
+            /* Após o pagamento vamos dispar um comando responsavel por fazer alteraçoes na Entidade
+               lembrando que :
+                Eventos: Não realiza alteração nas entidades.
+                Commandos: Sempre realiza alguma alteração no nosso dominio.
+            
+            Por isto não finalizamos o pedido neste handler e sim disparamos um comando responsavel por está intenção
+            de negocio.
+             */
             await _mediatorHandler.EnviarComando(new FinalizarPedidoCommand(message.PedidoId, message.ClienteId));
         }
 
         public async Task Handle(PedidoPagamentoRecusadoEvent message, CancellationToken cancellationToken)
         {
+
+            // Dispara um command responsavel por cancelar e estornar o estoque
             await _mediatorHandler.EnviarComando(new CancelarProcessamentoPedidoEstornarEstoqueCommand(message.PedidoId, message.ClienteId));
         }
     }

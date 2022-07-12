@@ -2,6 +2,13 @@
 
 namespace NerdStore.Pagamentos.AntiCorruption
 {
+    /// <summary>
+    /// Responsavel por realizar a comunicação com o sistema externo de pagamento.
+    /// AntiCorruption : Responsavel por não poluir nosso dominio
+    /// 
+    /// É apenas uma faixada que é aplicada para a camada de negocios não precisar depender ou
+    /// conhecer o gatway de pagamentos.
+    /// </summary>
     public class PagamentoCartaoCreditoFacade : IPagamentoCartaoCreditoFacade
     {
         private readonly IPayPalGateway _payPalGateway;

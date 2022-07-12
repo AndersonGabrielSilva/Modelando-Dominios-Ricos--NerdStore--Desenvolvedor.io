@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace NerdStore.Core.DomainObjects.DTO
 {
+    // Utilizada apenas para o transporte de dados entre os contextos
     public class ListaProdutosPedido
     {
         public Guid PedidoId { get; set; }

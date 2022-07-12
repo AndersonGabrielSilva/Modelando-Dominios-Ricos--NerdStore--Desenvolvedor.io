@@ -3,6 +3,8 @@
     /// <summary>
     /// Evento de Integração são os eventos que são responsaveis por fazer a ponte de um contexto
     /// para outro contexto
+    /// Ou seja ele é um cross context, não é expecifico de algum context.
+    /// Este evento é lançado e varios contextos podem consumir ele
     /// <para></para>
     /// </summary>
     public abstract class IntegrationEvent : Event

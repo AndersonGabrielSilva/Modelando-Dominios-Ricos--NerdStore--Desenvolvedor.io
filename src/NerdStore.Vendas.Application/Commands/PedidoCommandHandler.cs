@@ -171,6 +171,11 @@ namespace NerdStore.Vendas.Application.Commands
             return await _pedidoRepository.UnitOfWork.Commit();
         }
 
+        /* Este comando é responsavel apenas por iniciar o pedido.
+           A rotina de debitar estoque, realizar pagamento e etc, não será realizado neste comand
+           pois esta responsabilidade é de outro contexto. 
+           Para resolver este problema iremos disparar outro evento para execultar estas ações
+        */
         public async Task<bool> Handle(IniciarPedidoCommand message, CancellationToken cancellationToken)
         {
             if (!ValidarComando(message)) return false;
@@ -182,6 +187,7 @@ namespace NerdStore.Vendas.Application.Commands
             pedido.PedidoItems.ForEach(i => itensList.Add(new Item { Id = i.ProdutoId, Quantidade = i.Quantidade }));
             var listaProdutosPedido = new ListaProdutosPedido { PedidoId = pedido.Id, Itens = itensList };
 
+            // Após iniciar o pedido vamos disparar o evento de Pedido Iniciado
             pedido.AdicionarEvento(new PedidoIniciadoEvent(pedido.Id, pedido.ClienteId, listaProdutosPedido, pedido.ValorTotal, message.NomeCartao, message.NumeroCartao, message.ExpiracaoCartao, message.CvvCartao));
 
             _pedidoRepository.Atualizar(pedido);

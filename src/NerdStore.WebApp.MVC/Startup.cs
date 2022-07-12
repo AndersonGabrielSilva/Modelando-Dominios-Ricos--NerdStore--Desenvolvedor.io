@@ -15,6 +15,7 @@ using NerdStore.Catalogo.Data;
 using NerdStore.Pagamentos.Data;
 using NerdStore.Vendas.Data;
 using NerdStore.WebApp.MVC.Setup;
+using System.Linq;
 
 namespace NerdStore.WebApp.MVC
 {
@@ -68,6 +69,8 @@ namespace NerdStore.WebApp.MVC
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            var teste = Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 10);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

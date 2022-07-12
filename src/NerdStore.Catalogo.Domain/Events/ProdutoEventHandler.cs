@@ -41,6 +41,7 @@ namespace NerdStore.Catalogo.Domain.Events
 
             if (result)
             {
+                //Dispara o Evento para o contexto de pagamento realizar a rotina de pagamento
                 await _mediatorHandler.PublicarEvento(new PedidoEstoqueConfirmadoEvent(message.PedidoId, message.ClienteId, message.Total, message.ProdutosPedido, message.NomeCartao, message.NumeroCartao, message.ExpiracaoCartao, message.CvvCartao));
             }
             else
