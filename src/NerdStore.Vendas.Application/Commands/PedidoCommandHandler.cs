@@ -14,6 +14,19 @@ using NerdStore.Vendas.Domain;
 
 namespace NerdStore.Vendas.Application.Commands
 {
+    #region Anotação - Commandos
+    /*
+     * Command : São responsaveis por indicar uma intenção de negocio.
+        - Este Patterns é a base da arquitetura baseada em eventos, podemos notar no exemplo deste projeto
+          que não existe não existem classes chamando classes ou varias dependencias adicionadas ao projeto.
+          toda comunicação é realizada por meio de eventos e comandos, tornando nossa aplicação completamente 
+          desaclopada entre os contextos/dlls.
+        - Sempre que desejarmos conectar com outro contexto, iremos disparar um evento de integração (presente na camada do CORE)
+          responsavel por isto.
+        - Sempre é uma boa pratica deixar nossos comandos bastante expressivos.
+     */
+    #endregion
+
     /// <summary>
     /// Responsavel por manipular os meus Commands
     /// MediatR 
@@ -194,8 +207,19 @@ namespace NerdStore.Vendas.Application.Commands
             return await _pedidoRepository.UnitOfWork.Commit();
         }
 
+        /// <summary>
+        /// Realiza a intenção de Finalizar o Pedido em sí.
+        /// <para>Lembrando:</para>
+        /// <para>Todo Command representa uma intenção de negocio, ou seja todo command realiza alguma alteração 
+        /// em nosso dominio.</para>
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<bool> Handle(FinalizarPedidoCommand message, CancellationToken cancellationToken)
         {
+
+
             var pedido = await _pedidoRepository.ObterPorId(message.PedidoId);
 
             if (pedido == null)
@@ -204,6 +228,8 @@ namespace NerdStore.Vendas.Application.Commands
                 return false;
             }
 
+            // Finaliza o pedido utilizando o DDD, seguindo a regra que cada entidade
+            // é responsavel por aplicar suas proprias regras de negocio.
             pedido.FinalizarPedido();
 
             pedido.AdicionarEvento(new PedidoFinalizadoEvent(message.PedidoId));
@@ -224,6 +250,10 @@ namespace NerdStore.Vendas.Application.Commands
             pedido.PedidoItems.ForEach(i => itensList.Add(new Item { Id = i.ProdutoId, Quantidade = i.Quantidade }));
             var listaProdutosPedido = new ListaProdutosPedido { PedidoId = pedido.Id, Itens = itensList };
 
+            /*Dispara um evento de integração, pois existe rotinas que estão presentes em outros contextos
+             como por exemplo a rotina de estornar o estoque que está lá no contexto de "Estoque".
+             Está é a forma de comunicar um contexto com outro sem necessariamente adicionar a referencia do projeto
+             de estoque. Possibilitando assim uma aplicação mais desacoplada.*/
             pedido.AdicionarEvento(new PedidoProcessamentoCanceladoEvent(pedido.Id, pedido.ClienteId, listaProdutosPedido));
             pedido.TornarRascunho();
 
